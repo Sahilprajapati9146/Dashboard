@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="bg-gray-100">
+
+    
+    <div class="flex">
+        <!-- Sidebar: Hidden on small screens, visible on medium and above -->
+        <div class="hidden md:block w-64 bg-gray-800 text-white min-h-screen p-4">
+            <h2 class="text-2xl font-semibold mb-6">Dashboard</h2>
+            <ul>
+                <li class="mb-4">
+                    <a href="#" class="hover:text-yellow-500">Dashboard</a>
+                </li>
+                <li class="mb-4">
+                    <a href="#" class="hover:text-yellow-500">Analytics</a>
+                </li>
+                <li class="mb-4">
+                    <a href="#" class="hover:text-yellow-500">Projects</a>
+                </li>
+                <li class="mb-4">
+                    <a href="#" class="hover:text-yellow-500">Reports</a>
+                </li>
+                <li>
+                    <a href="#" class="hover:text-yellow-500">Settings</a>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="flex-1 p-10">
+            <header class="flex justify-between items-center mb-6">
+                <div class="text-4xl font-semibold">Welcome to the Dashboard</div>
+                <button class="md:hidden text-white bg-gray-800 p-2 rounded">☰</button>
+            </header>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div class="bg-white shadow-lg p-6 rounded-lg">
+                    <h3 class="font-semibold text-lg">Total Users</h3>
+                    <p class="text-2xl font-bold">1,245</p>
+                </div>
+                <div class="bg-white shadow-lg p-6 rounded-lg">
+                    <h3 class="font-semibold text-lg">Revenue</h3>
+                    <p class="text-2xl font-bold">$45,680</p>
+                </div>
+                <div class="bg-white shadow-lg p-6 rounded-lg">
+                    <h3 class="font-semibold text-lg">Active Projects</h3>
+                    <p class="text-2xl font-bold">32</p>
+                </div>
+            </div>
+
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white shadow-lg p-6 rounded-lg">
+                    <h3 class="font-semibold text-lg">Monthly Sales</h3>
+                    <canvas id="barChart" class="mt-4"></canvas>
+                </div>
+                <div class="bg-white shadow-lg p-6 rounded-lg">
+                    <h3 class="font-semibold text-lg">Website Traffic</h3>
+                    <canvas id="lineChart" class="mt-4"></canvas>
+                </div>
+                <div class="bg-white shadow-lg p-6 rounded-lg">
+                    <h3 class="font-semibold text-lg">Customer Demographics</h3>
+                    <canvas id="pieChart" class="mt-4"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        var barChartContext = document.getElementById('barChart').getContext('2d');
+        new Chart(barChartContext, {
+            type: 'bar',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                datasets: [{
+                    label: 'Sales in USD',
+                    data: [1200, 1500, 1800, 2000, 2500, 3000],
+                    backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                    borderColor: 'rgba(255, 159, 64, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        var lineChartContext = document.getElementById('lineChart').getContext('2d');
+        new Chart(lineChartContext, {
+            type: 'line',
+            data: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5'],
+                datasets: [{
+                    label: 'Page Views',
+                    data: [2000, 3000, 3500, 4200, 5000],
+                    fill: false,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+
+        var pieChartContext = document.getElementById('pieChart').getContext('2d');
+        new Chart(pieChartContext, {
+            type: 'pie',
+            data: {
+                labels: ['Male', 'Female', 'Other'],
+                datasets: [{
+                    label: 'Gender Distribution',
+                    data: [60, 35, 5],
+                    backgroundColor: ['rgba(54, 162, 235, 0.2)', 'rgba(255, 99, 132, 0.2)', 'rgba(75, 192, 192, 0.2)'],
+                    borderColor: ['rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)', 'rgba(75, 192, 192, 1)'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+    </script>
+</body>
+
+</html>
